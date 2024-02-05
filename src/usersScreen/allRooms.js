@@ -41,20 +41,20 @@ function AllRooms() {
   };
 
   return (
-    <div className="mt-2">
+    <div className="container" style={{marginTop:"4%",marginBottom:"4%"}}>
       {/* <DateRangePicker ranges={selectedDateRange} onChange={handleDateSelect} /> */}
-      <div className="d-flex flex-wrap justify-content-around">
+      <div className="d-flex justify-content-around">
         <div className="row">
           {response.map((room, roomIndex) => (
             <div
-              className="col-md-4 mt-4"
+              className="col-md-4"
               key={roomIndex}
               style={{ cursor: "pointer" }}
               onClick={() => navigateToRoomDetails(room._id)}
             >
               <div
-                className="card mt-4"
-                style={{ width: "300px", margin: "10px" }}
+                className="card  mt-4"
+                style={{ width: '100%'}}
               >
                 <div className="card-body p-2">
                   <h3>{room.name}</h3>
@@ -62,7 +62,7 @@ function AllRooms() {
                     id={`carouselExampleIndicators${roomIndex}`}
                     className="carousel slide"
                     data-ride="carousel"
-                    style={{ maxHeight: "150px", overflow: "hidden" }} // Set a fixed height for the carousel
+                    style={{ maxHeight: "150px", overflow: "hidden" }}
                   >
                     <ol className="carousel-indicators">
                       {room.imageurls.map((url, index) => (
@@ -116,18 +116,19 @@ function AllRooms() {
                   </div>
                   <div className="mt-2">
                     {room.status === "not booked" && room.availability ? (
-                      <p>
-                        Availability:{" "}
-                        {new Date(
-                          room.availability.startDate
-                        ).toLocaleDateString()}{" "}
-                        -{" "}
-                        {new Date(
-                          room.availability.endDate
-                        ).toLocaleDateString()}
-                      </p>
+                       <p>
+                       {new Date(room.availability.startDate).toLocaleDateString('en-Uk', {
+                         day: 'numeric',
+                        
+                       })}{" "}
+                       -{" "}
+                       {new Date(room.availability.endDate).toLocaleDateString('en-Uk', {
+                         day: 'numeric',
+                         month: 'short',
+                       })}
+                     </p>
                     ) : (
-                      <p>Availability: Available</p>
+                      <h6>Booked</h6>
                     )}
                     <h6> Rs. {room.rentperday} /night</h6>
                   </div>
@@ -135,9 +136,9 @@ function AllRooms() {
                   <div className="d-flex justify-content-end">
                     <button
                       onClick={() => navigateToRoomDetails(room._id)}
-                      className="btn btn-secondary mt-2"
+                      className="btn btn-light mt-2"
                     >
-                      View Details
+                      <h6>View Details</h6>
                     </button>
                   </div>
                 </div>

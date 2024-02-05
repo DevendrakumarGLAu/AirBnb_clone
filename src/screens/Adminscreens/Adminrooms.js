@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-
+import "./Adminrooms.css"
 function Adminrooms() {
   const [rooms, setRooms] = useState([]);
   const loggedInUserId = localStorage.getItem('userId');
@@ -43,19 +43,6 @@ function Adminrooms() {
     }
   };
 
-  const handleUpdateRoom = async () => {
-    try {
-      const response = await axios.put(
-        `${process.env.REACT_APP_API_URL}/api/rooms/editRoom/${roomId}`,
-        editedRoomDetails
-      );
-      console.log('Room updated successfully:', response.data);
-      // Add logic to handle the updated room details if needed
-    } catch (error) {
-      console.error('Error updating room:', error);
-    }
-  };
-
   const handleDelete = async (roomId) => {
     try {
         console.warn('Warning: Deleting a room. This action is irreversible.');
@@ -75,28 +62,28 @@ function Adminrooms() {
         {rooms.length === 0 ? (
         <p>You haven't added any rooms yet.</p>
       ) : (
-        
-        <table className="table ">
+        <div className="table-container" style={{ overflowY: "auto", maxHeight: "500px" }}>
+        <table className="table table-sticky-header table-hover table-striped">
           <thead>
             <tr>
-              <th>S.No.</th>
-              <th>Room Name</th>
-              <th>Phone Number</th>
-              <th>Rent Per Day</th>
-              <th>Status</th>
+              <th scope="col">S.No.</th>
+              <th scope="col">Room Name</th>
+              <th scope="col">Phone Number</th>
+              <th scope="col">Rent Per Day</th>
+              <th scope="col">Status</th>
               {isAddedByCurrentUser && <th>Actions</th>}
             </tr>
           </thead>
           <tbody>
             {rooms.map((room, index) => (
               <tr key={room._id}>
-                <td>{index + 1}</td>
-                <td>{room.name}</td>
-                <td>{room.phonenumber}</td>
-                <td>{room.rentperday}</td>
-                <td>{room.status === 'booked' ? 'Booked' : 'Not Booked'}</td>
+                <td scope="row">{index + 1}</td>
+                <td scope="row">{room.name}</td>
+                <td scope="row">{room.phonenumber}</td>
+                <td scope="row">{room.rentperday}</td>
+                <td scope="row">{room.status === 'booked' ? 'Booked' : 'Not Booked'}</td>
                 {isAddedByCurrentUser(room.addedBy) && (
-                  <td>
+                  <td scope="row">
                     <div className="d-flex justify-content-start">
                       <button className="btn btn-secondary mx-2" onClick={() => handleDelete(room._id)}>Delete</button>
                       <button className="btn btn-primary">
@@ -109,6 +96,7 @@ function Adminrooms() {
             ))}
           </tbody>
         </table>
+        </div>
       )}
         </div>
       </div>

@@ -1,0 +1,10 @@
+.table-sticky-header th {
+    position: sticky;
+    top: -1px;
+    background-color: skyblue; /* Choose your preferred background color */
+    z-index: 1;
+  }
+
+  th{
+    color:white;
+  }

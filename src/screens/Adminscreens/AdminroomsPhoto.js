@@ -19,12 +19,12 @@ function AdminroomsPhoto() {
   }, []);
 
   return (
-    <div className="container mt-4" >
+    <div className="container "  style={{marginTop:"4%",marginBottom:"4%"}}>
       <div className="row justify-content-around">
         {response.map((room, roomIndex) => (
           (room.addedBy === storedUserId) && (
-            <div key={roomIndex} className="col-md-4 mb-4">
-              <div className="card" style={{ width: '100%', marginTop:"50px"}}>
+            <div key={roomIndex} className="col-md-4">
+              <div className="card mt-4" style={{ width: '100%'}}>
                 <div className="card-body p-2">
                   <h3>{room.name}</h3>
                   <div id={`carouselExampleIndicators${roomIndex}`} className="carousel slide" data-ride="carousel" style={{ maxHeight: '150px', overflow: 'hidden' }}>
@@ -54,22 +54,24 @@ function AdminroomsPhoto() {
                       <span className="sr-only">Next</span>
                     </a>
                   </div>
-                  <h6>
-                  {room.status === "not booked" && room.availability ? (
-                      <p>
-                        {" "}
-                        {new Date(
-                          room.availability.startDate
-                        ).toLocaleDateString()}{" "}
-                        -{" "}
-                        {new Date(
-                          room.availability.endDate
-                        ).toLocaleDateString()}
-                      </p>
+                  <div className="mt-2">
+                    {room.status === "not booked" && room.availability ? (
+                       <p>
+                       {new Date(room.availability.startDate).toLocaleDateString('en-Uk', {
+                         day: 'numeric',
+                         
+                       })}{" "}
+                       -{" "}
+                       {new Date(room.availability.endDate).toLocaleDateString('en-UK', {
+                         day: 'numeric',
+                         month: 'short',
+                       })}
+                     </p>
                     ) : (
                       <h6>Booked</h6>
-                    )}</h6>
-                  <h6> Rs. {room.rentperday} -night</h6>
+                    )}
+                    <h6> Rs. {room.rentperday} /night</h6>
+                  </div>
                 </div>
               </div>
             </div>
