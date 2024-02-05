@@ -69,11 +69,14 @@ function Adminrooms() {
 
   return (
 <div>
-      <h2>Admin Rooms</h2>
-      {rooms.length === 0 ? (
+      <h2 className='mt-4'>Admin Rooms</h2>
+      <div className='card' style={{width:"97%", marginLeft:"1%"}}>
+        <div className='card-body'>
+        {rooms.length === 0 ? (
         <p>You haven't added any rooms yet.</p>
       ) : (
-        <table className="table">
+        
+        <table className="table ">
           <thead>
             <tr>
               <th>S.No.</th>
@@ -107,6 +110,9 @@ function Adminrooms() {
           </tbody>
         </table>
       )}
+        </div>
+      </div>
+     
     </div>
   );
 }

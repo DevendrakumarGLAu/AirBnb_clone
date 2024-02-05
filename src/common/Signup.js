@@ -1,7 +1,7 @@
 // Signup.js
 
 import React, { useState } from 'react';
-import Logo from './airbnblogo.png';
+import Logo from './airbnb.svg';
 import { useNavigate, Link } from 'react-router-dom';
 
 function Signup() {
@@ -10,7 +10,7 @@ function Signup() {
   const [password, setPassword] = useState('');
   const [isAdmin, setIsAdmin] = useState(false); // Default to false for regular users
   const Navigate = useNavigate();
-
+  const [registrationError, setRegistrationError] = useState(null);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const apiUrl = process.env.REACT_APP_API_URL;
@@ -29,10 +29,13 @@ function Signup() {
         console.log('Registration successful:', data);
         Navigate('/');
       } else {
-        console.error('Registration failed');
+        const errorData = await response.json();
+        console.error('Registration failed:', errorData.error);
+        setRegistrationError(errorData.error);
       }
     } catch (error) {
       console.error('Error during registration:', error);
+      setRegistrationError('An error occurred during registration.');
     }
   };
 
@@ -50,9 +53,9 @@ function Signup() {
         <div className="card">
           <div className="card-body">
             <div className='card-title text-center'>Signup</div>
-            
+
             <form onSubmit={handleSubmit}>
-            <div className="mb-3 form-check">
+              <div className="mb-3 form-check">
                 <input
                   type="checkbox"
                   className="form-check-input"
@@ -70,6 +73,7 @@ function Signup() {
                 </label>
                 <input
                   type="text"
+                  placeholder='Enter your name'
                   className="form-control"
                   id="name"
                   value={name}
@@ -82,6 +86,7 @@ function Signup() {
                 </label>
                 <input
                   type="email"
+                  placeholder='Enter your email address'
                   className="form-control"
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
@@ -98,13 +103,19 @@ function Signup() {
                 </label>
                 <input
                   type="password"
+                  placeholder='Enter your password'
                   className="form-control"
                   id="exampleInputPassword1"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              
+              {registrationError && (
+                <div className="alert alert-danger" role="alert">
+                  {registrationError}
+                </div>
+              )}
+
               <button type="submit" className="btn btn-primary">
                 Signup
               </button>

@@ -14,11 +14,11 @@ router.post("/register", async (req, res) => {
 
     const existingUser = await User.findOne({ email: lowercasedEmail });
     if (existingUser) {
-      // console.log(email,"Email already exists. Please use a different email address.");
       return res.status(400).json({
         error: "Email already exists. Please use a different email address.",
       });
     }
+
     const newUser = new User({ name, email: lowercasedEmail, password, isAdmin });
     const user = await newUser.save();
     res.json({ message: "User Registered Successfully" });

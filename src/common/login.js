@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import Logo from './airbnblogo.png';
+import Logo from './airbnb.svg';
 import { useNavigate, Link } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const Navigate = useNavigate();
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,9 +33,11 @@ function Login() {
         Navigate('/home');
       } else {
         console.error('Login failed');
+        setError('Invalid email or password. Please try again.');
       }
     } catch (error) {
       console.error('Error during login:', error);
+      setError('Error during login. Please try again.');
     }
   };
 
@@ -58,6 +61,7 @@ function Login() {
                 </label>
                 <input
                   type="email"
+                  placeholder='Enter your email address'
                   className="form-control"
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
@@ -74,6 +78,7 @@ function Login() {
                 </label>
                 <input
                   type="password"
+                  placeholder='Enter your password'
                   className="form-control"
                   id="exampleInputPassword1"
                   value={password}
@@ -86,6 +91,7 @@ function Login() {
                   Check me out
                 </label>
               </div>
+              {error && <div className="alert alert-danger" role="alert">{error}</div>}
               <button type="submit" className="btn btn-primary">
                 Submit
               </button>

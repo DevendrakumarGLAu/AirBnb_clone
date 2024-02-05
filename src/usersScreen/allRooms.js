@@ -47,7 +47,7 @@ function AllRooms() {
         <div className="row">
           {response.map((room, roomIndex) => (
             <div
-              className="col-md-4"
+              className="col-md-4 mt-4"
               key={roomIndex}
               style={{ cursor: "pointer" }}
               onClick={() => navigateToRoomDetails(room._id)}
@@ -129,7 +129,7 @@ function AllRooms() {
                     ) : (
                       <p>Availability: Available</p>
                     )}
-                    <p> Rs.{room.rentperday} /night:</p>
+                    <h6> Rs. {room.rentperday} /night</h6>
                   </div>
 
                   <div className="d-flex justify-content-end">

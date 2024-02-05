@@ -7,7 +7,7 @@ function Home() {
   const isAdmin = localStorage.getItem('isAdmin') === 'true';
   return (
     <div>
-        <div>
+        <div className='mt-4' >
       {isAdmin ? <AdminroomsPhoto /> : <AllRooms />}
     </div>
         

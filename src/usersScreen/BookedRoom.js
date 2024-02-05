@@ -60,7 +60,9 @@ function BookedRoom() {
     };
 
     return (
-      <table className="table p-2">
+      <div>
+        <div className='card' style={{width:"98%", marginLeft:"1%"}}>      
+          <table className="table p-2">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -98,6 +100,9 @@ function BookedRoom() {
           ))}
         </tbody>
       </table>
+      </div>
+      </div>
+
     );
   };
 

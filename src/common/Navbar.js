@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Logo from "./airbnblogo.png";
+import Logo from "./airbnb.svg";
+import '../common/Navbar.css';
 
 function Navbar() {
   const isAdmin = localStorage.getItem("isAdmin") === "true";
@@ -16,7 +17,8 @@ function Navbar() {
 
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-primary ">
+      <div className="mb-4">
+      <nav className="navbar navbar-expand-lg navbar-light bg-primary fixed-top  ">
         <a className="navbar-brand" href="#">
           <img
             src={Logo}
@@ -38,7 +40,7 @@ function Navbar() {
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
           <ul className="navbar-nav">
             <li className="nav-item active">
-              <Link className="nav-link" to="/home">
+              <Link className="nav-link" to="/home" style={{color:"white"}}>
                 Home <span className="sr-only">(current)</span>
               </Link>
               {/* <a className="nav-link" href="/home">Home <span className="sr-only">(current)</span></a> */}
@@ -47,17 +49,17 @@ function Navbar() {
             {isAdmin && (
               <ul className="navbar-nav">
                 <li className="nav-item active">
-                  <Link className="nav-link" to="/addRoom">
+                  <Link className="nav-link" to="/addRoom" style={{color:"white"}}>
                     Add Room
                   </Link>
                 </li>
                 <li className="nav-item">
-              <Link className="nav-link active" to="/AdminRoomDetails">
+              <Link className="nav-link active" to="/AdminRoomDetails" style={{color:"white"}}>
                 My Rooms Details
               </Link>
             </li>
                 <li className="nav-item">
-                  <Link className="nav-link active" to="/AdminroomsPhoto">
+                  <Link className="nav-link active" to="/AdminroomsPhoto" style={{color:"white"}}>
                    Room's Photo
                   </Link>
                 </li>
@@ -66,12 +68,12 @@ function Navbar() {
             {!isAdmin && (
               <ul className="navbar-nav">
               <li className="nav-item active">
-                <Link className="nav-link" to="/">
+                <Link className="nav-link" to="/" style={{color:"white"}}>
                  
                 </Link>
               </li>
               <li className="nav-item">
-            <Link className="nav-link active" to="/Mybookedroom">
+            <Link className="nav-link active" to="/Mybookedroom" style={{color:"white"}}>
               My bookedRoom
             </Link>
           </li>
@@ -84,7 +86,7 @@ function Navbar() {
                 id="navbarDropdownMenuLink"
                 data-toggle="dropdown"
                 aria-haspopup="true"
-                aria-expanded="false"
+                aria-expanded="false" style={{color:"white"}}
               >
                 {userName}
               </a>
@@ -100,14 +102,13 @@ function Navbar() {
                     Logout
                   </button>
                 )}
-                <a className="dropdown-item" href="#">
-                  Something else here
-                </a>
+                
               </div>
             </li>
           </ul>
         </div>
       </nav>
+      </div>
     </div>
   );
 }

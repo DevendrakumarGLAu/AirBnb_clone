@@ -8,8 +8,8 @@ function Profile() {
 
   return (
     <div>
-      <div className={`card mt-4 ${isAdmin ? 'text-success' : 'text-danger'}`} style={{ width: '20rem', marginLeft: '20px' }}>
-        <div className="card-body">
+      <div className={`card ${isAdmin ? 'text-success' : 'text-danger'}`} style={{ width: '20rem', marginLeft: '20px', marginTop:"5%" }}>
+        <div className="card-body" >
           <h5 className="card-title">{username}</h5>
           <p className="card-text">Email: {email}</p>
           <p className="card-text">Status: {isAdmin ? 'Admin' : 'User'}</p>
