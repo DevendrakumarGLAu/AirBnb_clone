@@ -1,14 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { DateRangePicker } from 'react-date-range';
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
 
-import { useParams } from 'react-router-dom';
+
+// import { useParams } from 'react-router-dom';
 
 function AddRoom() {
   const { register, handleSubmit, setValue } = useForm();
   const apiUrl = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
+  const [availability, setAvailability] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection',
+    },
+  ]);
+  const handleDateChange = (ranges) => {
+    setAvailability([ranges.selection]);
+  };
   const getUserIdFromLocalStorage = () => {
     const userId = localStorage.getItem("userId");
     // console.log("userrrrrrr", userId);
@@ -66,6 +80,7 @@ function AddRoom() {
                   {...register("roomName", { required: true })}
                 />
               </div>
+
             </div>
 
             <div class="col">
@@ -154,6 +169,15 @@ function AddRoom() {
               {...register("image3", { required: true })}
             />
           </div>
+          <div className="mb-3">
+    <label htmlFor="availability" className="form-label">
+      Availability
+    </label>
+    <DateRangePicker
+      ranges={[availability]}
+      onChange={handleDateChange}
+    />
+  </div>
           <div class="d-flex justify-content-end">
             <div class="p-2">
               <button type="button" class="btn btn-danger">

@@ -20,6 +20,7 @@ function AllRooms() {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/rooms/getAllRooms`);
+        console.log()
         setResponse(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -40,11 +41,11 @@ function AllRooms() {
   return (
     <div className="mt-2">
       {/* <DateRangePicker ranges={selectedDateRange} onChange={handleDateSelect} /> */}
-      <div className="d-flex flex-wrap justify-content-around">
+      <div className="d-flex flex-wrap justify-content-evenly">
         <div className='row'>
           {response.map((room, roomIndex) => (
             <div
-              className="col-md-4" // Set the column size to md-4 (three columns in a row)
+              className="col-md-3" // Set the column size to md-4 (three columns in a row)
               key={roomIndex}
               style={{ cursor: 'pointer' }}
               onClick={() => navigateToRoomDetails(room._id)}
@@ -83,6 +84,12 @@ function AllRooms() {
                       <span className="carousel-control-next-icon" aria-hidden="true"></span>
                       <span className="sr-only">Next</span>
                     </a>
+                  </div>
+                  <div className="mt-2">
+                    {room.currentBooking && (
+                      <p>Availability: {new Date(room.currentBooking.startDate).toLocaleDateString()} - {new Date(room.currentBooking.endDate).toLocaleDateString()}</p>
+                    )}
+                    {!room.currentBooking && <p>Availability: Available</p>}
                   </div>
                   <div class="d-flex justify-content-end">
                   <button onClick={() => navigateToRoomDetails(room._id)} className="btn btn-secondary mt-2">View Details</button>

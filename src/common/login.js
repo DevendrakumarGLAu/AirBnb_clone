@@ -40,7 +40,7 @@ function Login() {
 
   return (
     <div>
-      <nav className="navbar bg-body-tertiary" style={{ backgroundColor: '#e3f2fd' }}>
+      <nav className="navbar bg-body-tertiary fixed-top" style={{ backgroundColor: '#e3f2fd' }}>
         <div className="container-fluid">
           <a className="navbar-brand">
             <img src={Logo} alt="Airbnb Logo" style={{ height: '30px', width: 'auto' }} />
