@@ -27,7 +27,7 @@ function AdminroomsPhoto() {
               <div className="card" style={{ width: '100%' }}>
                 <div className="card-body p-2">
                   <h3>{room.name}</h3>
-                  <div id={`carouselExampleIndicators${roomIndex}`} className="carousel slide" data-ride="carousel" style={{ maxHeight: '200px', overflow: 'hidden' }}>
+                  <div id={`carouselExampleIndicators${roomIndex}`} className="carousel slide" data-ride="carousel" style={{ maxHeight: '150px', overflow: 'hidden' }}>
                     <ol className="carousel-indicators">
                       {room.imageurls.map((url, index) => (
                         <li
@@ -54,6 +54,8 @@ function AdminroomsPhoto() {
                       <span className="sr-only">Next</span>
                     </a>
                   </div>
+                  <p>Availability: {room.status === 'not booked' ? 'Available' : 'Not Available'}</p>
+                  <p> Rs.{room.rentperday} /night:</p>
                 </div>
               </div>
             </div>

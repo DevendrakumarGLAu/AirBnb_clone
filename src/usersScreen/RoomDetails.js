@@ -116,8 +116,8 @@ function RoomDetails() {
                 <td>{roomDetails.type}</td>
                 <td>{roomDetails.phonenumber}</td>
                 <td>{roomDetails.rentperday}</td>
-                <td>{new Date(roomDetails.currentBooking?.startDate).toLocaleDateString()}</td>
-                <td>{new Date(roomDetails.currentBooking?.endDate).toLocaleDateString()}</td>
+                <td>{new Date(roomDetails.availability?.startDate).toLocaleDateString()}</td>
+                <td>{new Date(roomDetails.availability?.endDate).toLocaleDateString()}</td>
                 <td>
                   {isRoomBooked ? (
                     <p>Room already booked</p>

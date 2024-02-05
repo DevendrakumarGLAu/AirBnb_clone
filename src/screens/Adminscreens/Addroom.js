@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { DateRangePicker } from 'react-date-range';
+import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main style file
-import 'react-date-range/dist/theme/default.css'; // theme css file
+import 'react-date-range/dist/theme/default.css';
+import { useParams } from 'react-router-dom';
 
-
-// import { useParams } from 'react-router-dom';
 
 function AddRoom() {
   const { register, handleSubmit, setValue } = useForm();
   const apiUrl = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
+  const { roomId } = useParams(); // Assuming you're using react-router
   const [availability, setAvailability] = useState([
     {
       startDate: new Date(),
@@ -20,16 +20,61 @@ function AddRoom() {
       key: 'selection',
     },
   ]);
+  useEffect(() => {
+    const fetchRoomDetails = async () => {
+      try {
+        if (roomId) {
+          const response = await axios.get(`${apiUrl}/api/rooms/getRoomById/${roomId}`);
+          const room = response.data;
+  
+          setValue('roomName', room.name);
+          setValue('rentPerDay', room.rentperday);
+          setValue('roomType', room.type);
+          setValue('phoneNumber', room.phonenumber);
+          setValue('image1', room.imageurls[0]);
+          setValue('image2', room.imageurls[1]);
+          setValue('image3', room.imageurls[2]);
+  
+          // Check if availability exists and has valid startDate and endDate
+          if (room.availability && room.availability.startDate && room.availability.endDate) {
+            setAvailability([
+              {
+                startDate: new Date(room.availability.startDate),
+                endDate: new Date(room.availability.endDate),
+                key: 'selection',
+              },
+            ]);
+          } else {
+            console.error('Invalid availability details:', room.availability);
+            setAvailability([
+              {
+                startDate: new Date(),
+                endDate: new Date(),
+                key: 'selection',
+              },
+            ]);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching room details:', error);
+      }
+    };
+  
+    fetchRoomDetails();
+  }, [roomId, setValue]);
+  
+  
+
   const handleDateChange = (ranges) => {
     setAvailability([ranges.selection]);
   };
+
   const getUserIdFromLocalStorage = () => {
-    const userId = localStorage.getItem("userId");
-    // console.log("userrrrrrr", userId);
+    const userId = localStorage.getItem('userId');
     return userId;
   };
+
   const onSubmit = async (data) => {
-    
     try {
       const roomData = {
         roomName: data.roomName,
@@ -38,26 +83,45 @@ function AddRoom() {
         phoneNumber: data.phoneNumber,
         imageurls: [data.image1, data.image2, data.image3],
         userId: getUserIdFromLocalStorage(),
+         availability: {
+          startDate: availability[0].startDate,
+          endDate: availability[0].endDate,
+        },
       };
 
       const headers = {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       };
 
-      const response = await axios.post(
-        `${apiUrl}/api/rooms/addRoom`,
-        roomData,
-        { headers }
-      );
+      if (roomId) {
+        const response = await axios.put(
+          `${apiUrl}/api/rooms/editRoom/${roomId}`,
+          roomData,
+          { headers }
+        );
 
-      if (response.status >= 200 && response.status < 300) {
-        console.log("Room added successfully:", response.data);
-        navigate("/home");
+        if (response.status >= 200 && response.status < 300) {
+          console.log('Room updated successfully:', response.data);
+          navigate('/home');
+        } else {
+          console.error('Failed to update room. Server response:', response.status);
+        }
       } else {
-        console.error("Failed to add room. Server response:", response.status);
+        const response = await axios.post(
+          `${apiUrl}/api/rooms/addRoom`,
+          roomData,
+          { headers }
+        );
+
+        if (response.status >= 200 && response.status < 300) {
+          console.log('Room added successfully:', response.data);
+          navigate('/home');
+        } else {
+          console.error('Failed to add room. Server response:', response.status);
+        }
       }
     } catch (error) {
-      console.error("Error adding room:", error);
+      console.error('Error adding/updating room:', error);
     }
   };
 
@@ -173,10 +237,10 @@ function AddRoom() {
     <label htmlFor="availability" className="form-label">
       Availability
     </label>
-    <DateRangePicker
-      ranges={[availability]}
-      onChange={handleDateChange}
-    />
+    <DateRange
+          ranges={[availability[0]]} // DateRange component expects an array of ranges
+          onChange={handleDateChange}
+        />
   </div>
           <div class="d-flex justify-content-end">
             <div class="p-2">

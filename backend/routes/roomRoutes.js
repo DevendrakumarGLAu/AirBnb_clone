@@ -6,7 +6,7 @@ const Room = require('../models/roomModel');
 
 router.post('/addRoom', async (req, res) => {
   try {
-    const { roomName, roomType, phoneNumber, rentperday, imageurls, currentBooking, userId } = req.body;
+    const { roomName, roomType, phoneNumber, rentperday, imageurls, availability, userId } = req.body;
 
     const newRoom = new Room({
       name: roomName,
@@ -14,7 +14,7 @@ router.post('/addRoom', async (req, res) => {
       phonenumber: phoneNumber,
       rentperday: rentperday,
       imageurls: imageurls,
-      currentBooking: currentBooking,
+      availability: availability,
       addedBy: userId,
     });
 
@@ -37,7 +37,7 @@ router.get('/getAllRooms', async (req, res) => {
 });
 router.put('/editRoom/:roomId', async (req, res) => {
   try {
-    const { roomName, roomType, phoneNumber, rentperday, imageurls, currentBooking } = req.body;
+    const { roomName, roomType, phoneNumber, rentperday, imageurls, availability } = req.body;
 
     const updatedRoom = await Room.findByIdAndUpdate(
       req.params.roomId,
@@ -47,7 +47,7 @@ router.put('/editRoom/:roomId', async (req, res) => {
         phonenumber: phoneNumber,
         rentperday: rentperday,
         imageurls: imageurls,
-        currentBooking: currentBooking,
+        availability: availability,
       },
       { new: true }
     );

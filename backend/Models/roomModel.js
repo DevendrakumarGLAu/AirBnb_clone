@@ -9,7 +9,7 @@ const roomSchema = mongoose.Schema(
     phonenumber: { type: String, required: true },
     rentperday: { type: Number, required: true },
     imageurls: [{ type: String }], // Array of image URLs
-    currentBooking: {
+    availability: {
       startDate: { type: Date },
       endDate: { type: Date },
     },
