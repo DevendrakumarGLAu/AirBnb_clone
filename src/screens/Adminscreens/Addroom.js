@@ -131,8 +131,8 @@ function AddRoom() {
       <h2 className="text-center">Add Room</h2>
       <div className="card p-2" style={{ width: "48rem", marginLeft: "20%" }}>
         <form onSubmit={handleSubmit(onSubmit)} className="p-2">
-          <div class="row">
-            <div class="col">
+          <div className="row">
+            <div className="col">
               <div className="mb-3">
                 <label htmlFor="roomName" className="form-label">
                   Room Location
@@ -147,7 +147,7 @@ function AddRoom() {
 
             </div>
 
-            <div class="col">
+            <div className="col">
               <div className="mb-3">
                 <label htmlFor="rentPerDay" className="form-label">
                   Rent Per Day
@@ -162,8 +162,8 @@ function AddRoom() {
             </div>
           </div>
 
-          <div class="row">
-            <div class="col">
+          <div className="row">
+            <div className="col">
               <div className="mb-3">
                 <label htmlFor="roomType" className="form-label">
                   Room Type
@@ -179,7 +179,7 @@ function AddRoom() {
               </div>
             </div>
 
-            <div class="col">
+            <div className="col">
               <div className="mb-3">
                 <label htmlFor="roomName" className="form-label">
                   Phone Number
@@ -193,8 +193,8 @@ function AddRoom() {
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col">
+          <div className="row">
+            <div className="col">
               <div className="mb-3">
                 <label htmlFor="image1" className="form-label">
                   Image 1 URL
@@ -207,7 +207,7 @@ function AddRoom() {
                 />
               </div>
             </div>
-            <div class="col">
+            <div className="col">
               <div className="mb-3">
                 <label htmlFor="image2" className="form-label">
                   Image 2 URL
@@ -242,15 +242,15 @@ function AddRoom() {
           onChange={handleDateChange}
         />
   </div>
-          <div class="d-flex justify-content-end">
-            <div class="p-2">
-              <button type="button" class="btn btn-danger">
+          <div className="d-flex justify-content-end">
+            <div className="p-2">
+              <button type="button" className="btn btn-danger">
                 Reset
               </button>
             </div>
-            <div class="p-2">
+            <div className="p-2">
               <button type="submit" className="btn btn-primary">
-                Add Room
+              {roomId ? 'Update Room' : 'Add Room'}
               </button>
             </div>
           </div>

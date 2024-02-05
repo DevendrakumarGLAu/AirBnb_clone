@@ -91,7 +91,7 @@ function Adminrooms() {
                 <td>{room.name}</td>
                 <td>{room.phonenumber}</td>
                 <td>{room.rentperday}</td>
-                <td>{room.status === 'true' ? 'Booked' : 'Not Booked'}</td>
+                <td>{room.status === 'booked' ? 'Booked' : 'Not Booked'}</td>
                 {isAddedByCurrentUser(room.addedBy) && (
                   <td>
                     <div className="d-flex justify-content-start">

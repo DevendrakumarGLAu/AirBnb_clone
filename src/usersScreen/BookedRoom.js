@@ -20,17 +20,15 @@ function BookedRoom() {
 
     fetchBookedRooms();
   }, []);
+
   const handleCancelBooking = async (roomId) => {
     try {
-      // const roomid()
-      // console.log("roomid",roomId)
       const response = await axios.put(
         `${process.env.REACT_APP_API_URL}/api/bookings/cancelBooking/${roomId}`
       );
 
       if (response.status === 200) {
         console.warn('Booking cancelled successfully:', response.data);
-        // fetchBookedRooms();
         setBookedRooms(response.data);
       } else {
         console.error('Failed to cancel booking. Server response:', response.status);
@@ -40,15 +38,27 @@ function BookedRoom() {
     }
   };
 
+  const calculateTotalCost = (room) => {
+    const startDate = new Date(room.availability.startDate);
+    const endDate = new Date(room.availability.endDate);
+    const rentPerDay = room.rentperday;
+
+    const numberOfDays = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+    const totalCost = numberOfDays * rentPerDay;
+
+    return totalCost;
+  };
+
   const renderBookedRooms = () => {
-    if (!Array.isArray(bookedRooms)) {
+    if (!Array.isArray(bookedRooms) || bookedRooms.length === 0) {
       return <p>No rooms booked by the user.</p>;
     }
-  
-    if (bookedRooms.length === 0) {
-      return <p>No rooms booked by the user.</p>;
-    }
-  
+    const formatDate = (dateString) => {
+      const date = new Date(dateString);
+      const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
+      return date.toLocaleDateString(undefined, options);
+    };
+
     return (
       <table className="table p-2">
         <thead>
@@ -58,6 +68,9 @@ function BookedRoom() {
             <th scope="col">Room Type</th>
             <th scope="col">Rent Per day</th>
             <th scope="col">Phone Number</th>
+            <th scope="col">Start Date</th>
+          <th scope="col">End Date</th>
+            <th scope="col">Total Cost</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
@@ -69,8 +82,15 @@ function BookedRoom() {
               <td>{room.type}</td>
               <td>{room.rentperday}</td>
               <td>{room.phonenumber}</td>
+              <td>{formatDate(room.availability.startDate)}</td>
+            <td>{formatDate(room.availability.endDate)}</td>
+            <td>{calculateTotalCost(room)}</td>
               <td>
-                <button type="button" className="btn btn-danger" onClick={() => handleCancelBooking(room._id)}>
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  onClick={() => handleCancelBooking(room._id)}
+                >
                   Cancel booking
                 </button>
               </td>
@@ -80,7 +100,6 @@ function BookedRoom() {
       </table>
     );
   };
-  
 
   return (
     <div>

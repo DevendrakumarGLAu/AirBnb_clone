@@ -132,7 +132,7 @@ function AllRooms() {
                     <p> Rs.{room.rentperday} /night:</p>
                   </div>
 
-                  <div class="d-flex justify-content-end">
+                  <div className="d-flex justify-content-end">
                     <button
                       onClick={() => navigateToRoomDetails(room._id)}
                       className="btn btn-secondary mt-2"
