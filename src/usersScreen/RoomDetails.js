@@ -104,8 +104,8 @@ function RoomDetails() {
                 <th scope="col">Room Type</th>
                 <th scope="col">Phone Number</th>
                 <th scope="col">Rent Per Day</th>
-                <th scope="col">Posted On</th>
-                <th scope="col">Last update on</th>
+                <th scope="col">Available On</th>
+                <th scope="col">Available upto</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
@@ -116,8 +116,8 @@ function RoomDetails() {
                 <td>{roomDetails.type}</td>
                 <td>{roomDetails.phonenumber}</td>
                 <td>{roomDetails.rentperday}</td>
-                <td> {new Date(roomDetails?.createdAt).toLocaleString()}</td>
-                <td>{new Date(roomDetails?.updatedAt).toLocaleString()}</td>
+                <td>{new Date(roomDetails.currentBooking?.startDate).toLocaleDateString()}</td>
+                <td>{new Date(roomDetails.currentBooking?.endDate).toLocaleDateString()}</td>
                 <td>
                   {isRoomBooked ? (
                     <p>Room already booked</p>
