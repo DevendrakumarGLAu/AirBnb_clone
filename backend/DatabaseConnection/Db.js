@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const dbconfig = {
-    mongoURL : 
-    "mongodb+srv://Devendra1997kumar:RJansm83UKsSGSZT@cluster0.es8qtfh.mongodb.net/HotelBooking?retryWrites=true&w=majority"
+    mongoURL : process.env.MongoDB_URL
 
 };
 const connectDB = async ()=>{
