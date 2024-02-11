@@ -48,9 +48,15 @@ function RoomDetails() {
         );
   
         if (response.status === 200) {
-          console.warn("Room booked successfully:", response.data);
-          setIsRoomBooked(true);
-          navigate("/home");
+          let answer = window.confirm("Do you want to book room");
+          if(answer){
+            alert("Your room booked succesfully")
+            console.log("Room booked successfully:", response.data);
+
+            setIsRoomBooked(true);
+            navigate("/home");
+          }
+         
         } else {
           console.error("Failed to Book room. Server response:", response.status);
         }
