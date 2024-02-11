@@ -29,7 +29,9 @@ function BookedRoom() {
 
       if (response.status === 200) {
         console.warn('Booking cancelled successfully:', response.data);
+        alert('Do you want to cancel thish hotel')
         setBookedRooms(response.data);
+        window.location.reload();
       } else {
         console.error('Failed to cancel booking. Server response:', response.status);
       }
