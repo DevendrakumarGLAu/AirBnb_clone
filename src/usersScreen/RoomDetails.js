@@ -8,6 +8,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../usersScreen/RoomDetails.css";
 import { useNavigate } from "react-router-dom";
+import FooterScreen from "../common/FooterScreen";
+
 
 function RoomDetails() {
   const { roomId } = useParams();
@@ -67,7 +69,7 @@ function RoomDetails() {
       console.error("Error booking room:", error);
     }
   }; 
-
+  
   const renderImageCarousel = () => {
     const settings = {
       dots: true,
@@ -96,6 +98,7 @@ function RoomDetails() {
 
   return (
     <div>
+      
       {roomDetails ? (
         <div>
           <h2>Room Details</h2>
@@ -143,7 +146,10 @@ function RoomDetails() {
       ) : (
         <div>No room details found.</div>
       )}
+<FooterScreen/>
+
     </div>
+    
   );
 }
 
