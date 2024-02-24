@@ -72,27 +72,25 @@ function RoomDetails() {
     const settings = {
       dots: true,
       infinite: true,
-      speed: 1000,
+      speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
     };
 
     return (
-      <div class="card">
-        <div class="card-body text-center">
-          <Slider {...settings} style={{ height: "400px" }}>
-            {roomDetails.imageurls.map((url, index) => (
-              <div key={index}>
-                <img
-                  src={url}
-                  alt={`Image ${index + 1}`}
-                  style={{ height: "400px" }}
-                />
-              </div>
-            ))}
-          </Slider>
-        </div>
+      <div className="card m-2">
+      <div className="card-body d-flex justify-content-center flex-wrap">
+        {roomDetails.imageurls.map((url, index) => (
+          <div key={index} className="m-2">
+            <img
+              src={url}
+              alt={`Image ${index + 1}`}
+              style={{ height: "200px", width: "auto" }}
+            />
+          </div>
+        ))}
       </div>
+    </div>
     );
   };
 

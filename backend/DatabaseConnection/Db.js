@@ -3,6 +3,7 @@ const dbconfig = {
     mongoURL : process.env.MongoDB_URL
 
 };
+console.log("dbconfig", dbconfig.mongoURL)
 const connectDB = async ()=>{
     try {
         await mongoose.connect(dbconfig.mongoURL,{

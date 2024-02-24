@@ -50,7 +50,6 @@ function AllRooms() {
               className="col-md-4"
               key={roomIndex}
               style={{ cursor: "pointer" }}
-              onClick={() => navigateToRoomDetails(room._id)}
             >
               <div
                 className="card  mt-4"
