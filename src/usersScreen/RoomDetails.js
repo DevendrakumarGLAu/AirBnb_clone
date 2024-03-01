@@ -23,7 +23,7 @@ function RoomDetails() {
         const response = await axios.get(
           `${process.env.REACT_APP_API_URL}/api/rooms/getRoomById/${roomId}`
         );
-        console.log("rooms details",response.data)
+        // console.log("rooms details",response.data)
         setRoomDetails(response.data);
         setIsRoomBooked(response.data.status === "booked");
       } catch (error) {

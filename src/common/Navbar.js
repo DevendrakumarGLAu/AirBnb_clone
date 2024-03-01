@@ -55,7 +55,7 @@ function Navbar() {
                 </li>
                 <li className="nav-item">
               <Link className="nav-link active" to="/AdminRoomDetails" style={{color:"white"}}>
-                My Rooms Details
+                All Rooms Tables
               </Link>
             </li>
                 <li className="nav-item">
