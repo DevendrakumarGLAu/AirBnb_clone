@@ -15,7 +15,7 @@ function Adminroomsdetails() {
         startDate: new Date(),
         endDate: new Date(),
         key: 'selection',
-      });
+    });
 
     useEffect(() => {
         const fetchRoomDetails = async () => {
@@ -28,11 +28,11 @@ function Adminroomsdetails() {
                 if (response.data && response.data.availability) {
                     const { startDate, endDate } = response.data.availability;
                     setDateRange({
-                      startDate: new Date(startDate),
-                      endDate: new Date(endDate),
-                      key: 'selection',
+                        startDate: new Date(startDate),
+                        endDate: new Date(endDate),
+                        key: 'selection',
                     });
-                  }
+                }
             } catch (error) {
                 console.log('error fetching room details:', error);
             } finally {
@@ -60,7 +60,7 @@ function Adminroomsdetails() {
     const daysDifference = calculateDaysDifference();
     const handleSelect = (ranges) => {
         setDateRange(ranges.selection);
-      };
+    };
 
     return (
         <div className='mt-4'>
@@ -182,12 +182,12 @@ function Adminroomsdetails() {
                                                         </div>
                                                         <div class="d-flex justify-content-between">
                                                             <div class="p-1">AirBnB service charge</div>
-                                                            <div class="p-1"><i>&#x20B9;</i>{room.rentperday * daysDifference *.15}</div>
+                                                            <div class="p-1"><i>&#x20B9;</i>{room.rentperday * daysDifference * .15}</div>
                                                         </div>
                                                         <hr></hr>
                                                         <div class="d-flex justify-content-between">
                                                             <div class="p-1"><h5>Total before taxes</h5></div>
-                                                            <div class="p-1"><h5><i>&#x20B9;</i>{room.rentperday * daysDifference *1.15}</h5></div>
+                                                            <div class="p-1"><h5><i>&#x20B9;</i>{room.rentperday * daysDifference * 1.15}</h5></div>
                                                         </div>
 
                                                         <div class="d-flex justify-content-center mt-2">
@@ -201,20 +201,28 @@ function Adminroomsdetails() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className='col-lg-6'>
-                                    
-                                    <DateRangePicker
-                                    
-                          ranges={[dateRange]}
-                          onChange={handleSelect}
-                          months={2}
-                          direction='horizontal'
-                        />
+                                        <div className='col-lg-6 mt-4'>
+
+                                            <DateRangePicker
+
+                                                ranges={[dateRange]}
+                                                onChange={handleSelect}
+                                                months={2}
+                                                direction='horizontal'
+                                            />
+                                        </div>
                                     </div>
-                                    </div>
-                                   
+
                                 </div>
-                               
+
+                            </div>
+                            <div className='card  m-4'>
+                                <div className='card-body'>
+                                    <div className=' p-4'>
+                                        <iframe src={room.googleLocation} width="100%" height="450" style={{ border: "0;" }} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                                    </div>
+                                </div>
                             </div>
                             {<FooterScreen></FooterScreen>}
                         </div>

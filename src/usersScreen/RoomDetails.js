@@ -199,11 +199,14 @@ function RoomDetails() {
 
                                                         </div>
                                                         <div className="col border border-rounded p-2 " style={{ width: '100%' }}>
-                                                            <label >Guest</label>
-                                                            <select>
-                                                                <option value=''>1</option>
-                                                                <option value=''>2</option>
-                                                                <option value=''>3</option>
+                                                            <label >No of Guest</label>
+                                                            <select className="form-select form-select-lg mb-3" aria-label="Large select example">
+                                                            <option selected> {room.guests}</option>
+                                                                <option value='1'>1</option>
+                                                                <option value='2'>2</option>
+                                                                <option value='3'>3</option>
+                                                                <option value='4'>4</option>
+                                                                <option value='5'>5</option>
                                                             </select>
                                                         </div>
                                                         <div className="d-flex justify-content-between">
@@ -218,12 +221,12 @@ function RoomDetails() {
                                                         </div>
                                                         <div class="d-flex justify-content-between">
                                                             <div class="p-1">AirBnB service charge</div>
-                                                            <div class="p-1"><i>&#x20B9;</i>{room.rentperday * daysDifference * .15}</div>
+                                                            <div class="p-1"><i>&#x20B9;</i>{parseInt(room.rentperday * daysDifference * .15)}</div>
                                                         </div>
                                                         <hr></hr>
                                                         <div class="d-flex justify-content-between">
                                                             <div class="p-1"><h5>Total before taxes</h5></div>
-                                                            <div class="p-1"><h5><i>&#x20B9;</i>{room.rentperday * daysDifference * 1.15}</h5></div>
+                                                            <div class="p-1"><h5><i>&#x20B9;</i>{parseInt(room.rentperday * daysDifference * 1.15)}</h5></div>
                                                         </div>
 
                                                         <div class="d-flex justify-content-center mt-2">
@@ -234,7 +237,7 @@ function RoomDetails() {
                                                                     <button type="button" className="btn btn-danger mt-2" onClick={handleBookRoom}>Reserve</button>
                                                                 )
                                                             }
-                                                            {room.status === 'booked' && <button type="button" className="btn btn-danger mt-2" >Reserve</button>}
+                                                            {/* {room.status === 'booked' && <button type="button" className="btn btn-danger mt-2" >Reserve</button>} */}
                                                             {/* {!isAdmin && <span className='text-danger text-center'>You won't be charged yet</span>} */}
                                                         </div>
                                                     </div>
@@ -255,6 +258,14 @@ function RoomDetails() {
 
                                 </div>
 
+                            </div>
+                            <div className='card  m-4'>
+                                <div className='card-body'>
+                                    <div className=' p-4'>
+                                        <iframe src={room.googleLocation} width="100%" height="450" style={{ border: "0;" }} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                                    </div>
+                                </div>
                             </div>
                             {<FooterScreen></FooterScreen>}
                         </div>

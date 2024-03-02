@@ -25,6 +25,7 @@ const roomSchema = mongoose.Schema(
     beds: { type: Number, required: true },
     bathrooms: { type: Number, required: true },
     reviews: { type: Number, default: 0 },
+    googleLocation: { type: String },
     amenities: {
       kitchen: { type: Boolean, default: false },
       wifi: { type: Boolean, default: false },

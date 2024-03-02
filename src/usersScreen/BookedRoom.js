@@ -29,7 +29,7 @@ function BookedRoom() {
 
       if (response.status === 200) {
         console.warn('Booking cancelled successfully:', response.data);
-        let answer = window.confirm('Do you want to cancel thish hotel')
+        let answer = window.confirm('Do you want to cancel this hotel')
         if(answer){
           setBookedRooms(response.data);
           window.location.reload();
@@ -49,7 +49,7 @@ function BookedRoom() {
     const rentPerDay = room.rentperday;
 
     const numberOfDays = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
-    const totalCost = numberOfDays * rentPerDay;
+    const totalCost = parseInt(numberOfDays * rentPerDay * 1.15);
 
     return totalCost;
   };
@@ -67,24 +67,24 @@ function BookedRoom() {
     return (
       <div>
         <div className='card' style={{width:"98%", marginLeft:"1%"}}>      
-          <table className="table p-2">
+          <table className="table p-2" >
         <thead>
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">Room Name</th>
-            <th scope="col">Room Type</th>
-            <th scope="col">Rent Per day</th>
-            <th scope="col">Phone Number</th>
-            <th scope="col">Start Date</th>
-          <th scope="col">End Date</th>
-            <th scope="col">Total Cost</th>
-            <th scope="col">Action</th>
+            <th scope="col" style={{color:"black"}}>#</th>
+            <th scope="col" style={{color:"black"}}>Room Name</th>
+            <th scope="col" style={{color:"black"}}>Room Type</th>
+            <th scope="col" style={{color:"black"}}>Rent Per day</th>
+            <th scope="col" style={{color:"black"}}>Phone Number</th>
+            <th scope="col" style={{color:"black"}}>Start Date</th>
+          <th scope="col"   style={{color:"black"}}>End Date</th>
+            <th scope="col" style={{color:"black"}}>Total Cost</th>
+            <th scope="col" style={{color:"black"}}>Action</th>
           </tr>
         </thead>
         <tbody>
           {bookedRooms.map((room, index) => (
             <tr key={index}>
-              <th scope="row">{index + 1}</th>
+              <th scope="row" style={{color:"black"}}>{index + 1}</th>
               <td>{room.name}</td>
               <td>{room.type}</td>
               <td>{room.rentperday}</td>

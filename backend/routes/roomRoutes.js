@@ -3,13 +3,15 @@
 const express = require('express');
 const router = express.Router();
 // const Room = require('../models/roomModel');
-const Room = require('../Models/roomModel')
+// const Room = require('../Models/roomModel')
+const Room = require('../models/roomModel');
 
 router.post('/addRoom', async (req, res) => {
   try {
     const {
       roomName,
       LocationName,
+      googleLocation,
       roomType,
       phoneNumber,
       description,
@@ -28,6 +30,7 @@ router.post('/addRoom', async (req, res) => {
     const newRoom = new Room({
       name: roomName,
       LocationName,
+      googleLocation:googleLocation,
       type: roomType,
       phonenumber: phoneNumber,
       description:description,
@@ -131,9 +134,11 @@ router.get('/getAllRooms', async (req, res) => {
 // });
 router.put('/editRoom/:roomId', async (req, res) => {
   try {
+    console.log('Request Body:', req.body);
     const {
       roomName,
       LocationName,
+      googleLocation:googleLocation,
       roomType,
       phoneNumber,
       description,
@@ -147,14 +152,13 @@ router.put('/editRoom/:roomId', async (req, res) => {
       reviews,
       amenities = {}, // Set default value as an empty object
     } = req.body;
-    console.log('Request Body:', req.body);
-
 
     const updatedRoom = await Room.findByIdAndUpdate(
       req.params.roomId,
       {
         name: roomName,
         LocationName,
+        googleLocation:googleLocation,
         type: roomType,
         phonenumber: phoneNumber,
         description: description,

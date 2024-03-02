@@ -27,10 +27,11 @@ function AddRoom() {
         if (roomId) {
           const response = await axios.get(`${apiUrl}/api/rooms/getRoomDetails/${roomId}`);
           const room = response.data;
-          console.log("room", room);
+          console.log("room update data", room);
 
           setValue('roomName', room.name);
           setValue('rentPerDay', room.rentperday);
+          setValue('googleLocation',room.googleLocation);
           // setValue('roomType', room.type);
           // console.log('Before setValue - roomType:', room.type);
           setValue('roomType', room.type.toLowerCase());
@@ -100,6 +101,7 @@ function AddRoom() {
         LocationName: data.LocationName,
         roomType: data.roomType,
         rentperday: data.rentPerDay,
+        googleLocation:data.googleLocation,
         phoneNumber: data.phoneNumber,
         imageurls: [data.image1, data.image2, data.image3],
         userId: getUserIdFromLocalStorage(),
@@ -288,6 +290,21 @@ function AddRoom() {
                 />
               </div>
             </div>
+            <div className="col">
+              <div className="mb-3">
+                <label htmlFor="rentPerDay" className="form-label">
+                  <h6>Google Location</h6>
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="googleLocation"
+                  placeholder="enter google location here"
+                  {...register("googleLocation", { required: true })}
+                />
+              </div>
+            </div>
+            
           </div>
 
           <div className="mb-3">
