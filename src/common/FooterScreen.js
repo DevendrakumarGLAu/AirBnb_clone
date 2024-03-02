@@ -28,7 +28,7 @@ function FooterScreen() {
                 <div classNamess="p-2">
                     <div className="d-flex flex-column mb-3">
                         <div className="p-2"><h5>Hosting</h5></div>
-                        <div className="p-2"><Link to="/Aircover" className="gray-link">Airbnb your home</Link> </div>
+                        <div className="p-2"><Link to="/home" className="gray-link">Airbnb your home</Link> </div>
                         <div className="p-2"><Link to="/Aircover" className="gray-link">AirCover for Hosts</Link></div>
                         <div className="p-2"><Link to="/Aircover" className="gray-link">Hosting resources</Link></div>
                         <div className="p-2"><Link to="/Aircover" className="gray-link">Community forum</Link></div>
@@ -52,7 +52,7 @@ function FooterScreen() {
             <hr></hr>
             <div className="d-flex justify-content-between m-2">
                 <div className="">© 2024 Airbnb, Inc. · Privacy ·  Terms · Sitemap · Company details</div>
-                <div className=""><i class="fa-solid fa-globe"></i>  English(IN)   <span>INR</span> </div>
+                <div className=""><i class="fa-solid fa-globe"></i>  English(IN)   <span>INR <i class="fa-brands fa-facebook-f"></i> <i class="fa-brands fa-instagram"></i> <i class="fa-brands fa-whatsapp"></i></span> </div>
             </div>
 
         </div>

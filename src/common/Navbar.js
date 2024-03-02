@@ -77,6 +77,12 @@ function Navbar() {
               My bookedRoom
             </Link>
           </li>
+
+          {/* <li className="nav-item">
+            <Link className="nav-link active" to="/Mybookedroom" style={{color:"white"}}>
+              
+            </Link>
+          </li> */}
           </ul>
             )}
             <li className="nav-item dropdown">

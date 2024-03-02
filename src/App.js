@@ -19,6 +19,7 @@ import Loader from './common/Loader';
 function App() {
   const isLoggedIn = localStorage.getItem('token') !== null;
   const [loading, setLoading] = useState(false);
+  const isAdmin = localStorage.getItem('isAdmin') === 'true';
 
   useEffect(() => {
     // Add logic to set loading state based on your application's needs
@@ -40,10 +41,20 @@ function App() {
               <Route path="/addRoom" element={<Addroom />} />
               <Route path="/AdminRoomDetails" element={<Adminrooms/>} />
               <Route path="/AdminroomsPhoto" element={<AdminroomsPhoto/>} />
-              <Route path="/roomDetails/:roomId" element={<RoomDetails />} />
+              {/* <Route path="/roomDetails/:roomId" element={<RoomDetails />} /> */}
               <Route path="/editroom/:roomId" element={<Addroom />} />
               <Route path="/Mybookedroom" element={<BookedRoom/>} />
-              <Route path="/getRoomDetails/:roomId" element={<Adminroomsdetails/>} />
+              <Route
+    path="/getRoomDetails/:roomId"
+    element={
+        isAdmin ? (
+            <Adminroomsdetails />
+        ) : (
+            <RoomDetails/>
+        )
+    }
+/>
+              {/* <Route path="/getRoomDetails/:roomId" element={<Adminroomsdetails/>} /> */}
             </React.Fragment>
           )}
         </Routes>

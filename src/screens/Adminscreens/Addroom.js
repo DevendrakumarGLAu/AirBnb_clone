@@ -12,7 +12,7 @@ function AddRoom() {
   const { register, handleSubmit, setValue } = useForm();
   const apiUrl = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
-  const { roomId } = useParams(); // Assuming you're using react-router
+  const { roomId } = useParams();
   const [availability, setAvailability] = useState([
     {
       startDate: new Date(),
@@ -23,13 +23,19 @@ function AddRoom() {
   useEffect(() => {
     const fetchRoomDetails = async () => {
       try {
+        // console.log("roomId", roomId);
         if (roomId) {
-          const response = await axios.get(`${apiUrl}/api/rooms/getRoomById/${roomId}`);
+          const response = await axios.get(`${apiUrl}/api/rooms/getRoomDetails/${roomId}`);
           const room = response.data;
+          console.log("room", room);
 
           setValue('roomName', room.name);
           setValue('rentPerDay', room.rentperday);
-          setValue('roomType', room.type);
+          // setValue('roomType', room.type);
+          // console.log('Before setValue - roomType:', room.type);
+          setValue('roomType', room.type.toLowerCase());
+          // console.log('After setValue - roomType:', getValues('roomType'));
+          // setValue('roomType', room.type.toLowerCase());
           setValue('phoneNumber', room.phonenumber);
           setValue('image1', room.imageurls[0]);
           setValue('image2', room.imageurls[1]);
@@ -42,7 +48,6 @@ function AddRoom() {
           setValue('description', room.description);
           setValue('LocationName', room.LocationName);
 
-          // Check if availability exists and has valid startDate and endDate
           if (room.availability && room.availability.startDate && room.availability.endDate) {
             setAvailability([
               {
@@ -64,7 +69,7 @@ function AddRoom() {
 
           // Set checkbox values for amenities
           Object.keys(room.amenities).forEach((amenity) => {
-            setValue(`amenities.${amenity}`, room.amenities[amenity]);
+            setValue(`amenities.${amenity}`, room.amenities[amenity] || false);
           });
         }
       } catch (error) {
@@ -91,8 +96,8 @@ function AddRoom() {
     try {
       const roomData = {
         roomName: data.roomName,
-        description:data.description,
-        LocationName:data.LocationName,
+        description: data.description,
+        LocationName: data.LocationName,
         roomType: data.roomType,
         rentperday: data.rentPerDay,
         phoneNumber: data.phoneNumber,
@@ -170,11 +175,11 @@ function AddRoom() {
           <div className="row">
             <div className="col">
               <div className="mb-3">
-               <h6>
-               <label htmlFor="roomName " className="form-label">
-                  Room Location
-                </label>
-               </h6>
+                <h6>
+                  <label htmlFor="roomName " className="form-label">
+                    Room Location
+                  </label>
+                </h6>
                 <input
                   type="text"
                   className="form-control"
@@ -187,7 +192,7 @@ function AddRoom() {
             <div className="col">
               <div className="mb-3">
                 <label htmlFor="LocationName" className="form-label">
-                  <h6>Country Location Name</h6> 
+                  <h6>Country Location Name</h6>
                 </label>
                 <input
                   type="text"
@@ -216,7 +221,7 @@ function AddRoom() {
             <div className="col">
               <div className="mb-3">
                 <label htmlFor="image1" className="form-label">
-                <h6>First Image Address</h6>
+                  <h6>First Image Address</h6>
                 </label>
                 <input
                   type="text"
@@ -229,7 +234,7 @@ function AddRoom() {
             <div className="col">
               <div className="mb-3">
                 <label htmlFor="image2" className="form-label">
-                <h6>Second Image Address</h6>
+                  <h6>Second Image Address</h6>
                 </label>
                 <input
                   type="text"
@@ -241,7 +246,7 @@ function AddRoom() {
             </div>
             <div className="mb-3 mr-2">
               <label htmlFor="image3" className="form-label">
-              <h6>Third Image Address</h6>
+                <h6>Third Image Address</h6>
               </label>
               <input
                 type="text"
@@ -251,7 +256,8 @@ function AddRoom() {
               />
             </div>
           </div>
-
+          {/* value={getValues("roomType") || ""}
+                  onChange={(e) => setValue("roomType", e.target.value)} */}
           <div className="row">
             <div className="col">
               <div className="mb-3">
@@ -259,7 +265,7 @@ function AddRoom() {
                   <h6>Room Type</h6>
                 </label>
                 <select
-                  onChange={(e) => setValue("roomType", e.target.value)}
+                  {...register("roomType", {required:true})}
                   className="form-control"
                 >
                   <option value="">Please select type of room</option>
@@ -295,102 +301,102 @@ function AddRoom() {
             />
           </div>
           <div className="row">
-  <div className="col">
-    <div className="mb-3">
-      <label htmlFor="guests" className="form-label">
-         <h6>Guests </h6>
-      </label>
-      <select
-        className="form-select mx-2"
-        id="guests"
-        {...register("guests", { required: true })}
-      >
-        <option value="">Select Guests</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        {/* Add more options as needed */}
-      </select>
-    </div>
-  </div>
+            <div className="col">
+              <div className="mb-3">
+                <label htmlFor="guests" className="form-label">
+                  <h6>Guests </h6>
+                </label>
+                <select
+                  className="form-select mx-2"
+                  id="guests"
+                  {...register("guests", { required: true })}
+                >
+                  <option value="">Select Guests</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  {/* Add more options as needed */}
+                </select>
+              </div>
+            </div>
 
-  <div className="col">
-    <div className="mb-3">
-      <label htmlFor="bedrooms" className="form-label">
-        <h6>Bedrooms </h6>
-      </label>
-      <select
-        className="form-select mx-2"
-        id="bedrooms"
-        {...register("bedrooms", { required: true })}
-      >
-        <option value="">Select Bedrooms</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        {/* Add more options as needed */}
-      </select>
-    </div>
-  </div>
-</div>
+            <div className="col">
+              <div className="mb-3">
+                <label htmlFor="bedrooms" className="form-label">
+                  <h6>Bedrooms </h6>
+                </label>
+                <select
+                  className="form-select mx-2"
+                  id="bedrooms"
+                  {...register("bedrooms", { required: true })}
+                >
+                  <option value="">Select Bedrooms</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  {/* Add more options as needed */}
+                </select>
+              </div>
+            </div>
+          </div>
 
-<div className="row">
-  <div className="col">
-    <div className="mb-3">
-      <label htmlFor="beds" className="form-label">
-        <h6>Beds </h6>
-      </label>
-      <select
-        className="form-select mx-2"
-        id="beds"
-        {...register("beds", { required: true })}
-      >
-        <option value="">Select Beds</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        {/* Add more options as needed */}
-      </select>
-    </div>
-  </div>
+          <div className="row">
+            <div className="col">
+              <div className="mb-3">
+                <label htmlFor="beds" className="form-label">
+                  <h6>Beds </h6>
+                </label>
+                <select
+                  className="form-select mx-2"
+                  id="beds"
+                  {...register("beds", { required: true })}
+                >
+                  <option value="">Select Beds</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  {/* Add more options as needed */}
+                </select>
+              </div>
+            </div>
 
-  <div className="col">
-    <div className="mb-3 ">
-      <label htmlFor="bathrooms" className="form-label">
-         <h6>Bathrooms </h6>
-      </label>
-      <select
-        className="form-select mx-2"
-        id="bathrooms"
-        {...register("bathrooms", { required: true })}
-      >
-        <option value="">Select Bathrooms</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        {/* Add more options as needed */}
-      </select>
-    </div>
-  </div>
-</div>
+            <div className="col">
+              <div className="mb-3 ">
+                <label htmlFor="bathrooms" className="form-label">
+                  <h6>Bathrooms </h6>
+                </label>
+                <select
+                  className="form-select mx-2"
+                  id="bathrooms"
+                  {...register("bathrooms", { required: true })}
+                >
+                  <option value="">Select Bathrooms</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  {/* Add more options as needed */}
+                </select>
+              </div>
+            </div>
+          </div>
 
-<div className="mb-3">
-  <label htmlFor="reviews" className="form-label">
-     <h6>Reviews </h6>
-  </label>
-  <select
-    className="form-select mx-2"
-    id="reviews"
-    {...register("reviews", { required: true })}
-  >
-    <option value="">Select Star Rating</option>
-    <option value="1">1 Star</option>
-    <option value="2">2 Stars</option>
-    <option value="3">3 Stars</option>
-    <option value="4">4 Stars</option>
-    <option value="5">5 Stars</option>
-  </select>
-</div>
+          <div className="mb-3">
+            <label htmlFor="reviews" className="form-label">
+              <h6>Reviews </h6>
+            </label>
+            <select
+              className="form-select mx-2"
+              id="reviews"
+              {...register("reviews", { required: true })}
+            >
+              <option value="">Select Star Rating</option>
+              <option value="1">1 Star</option>
+              <option value="2">2 Stars</option>
+              <option value="3">3 Stars</option>
+              <option value="4">4 Stars</option>
+              <option value="5">5 Stars</option>
+            </select>
+          </div>
 
           <div className="row">
             <div className="col">
@@ -554,7 +560,7 @@ function AddRoom() {
             <div className="col">
               <div className="mb-3">
                 <label htmlFor="availability" className="form-label">
-                   <h6>Availability</h6>
+                  <h6>Availability</h6>
                 </label>
                 <DateRange
                   ranges={[availability[0]]} // DateRange component expects an array of ranges
@@ -566,7 +572,7 @@ function AddRoom() {
 
 
 
-<hr></hr>
+          <hr></hr>
 
           <div className="d-flex justify-content-end ">
             <div className="p-2">

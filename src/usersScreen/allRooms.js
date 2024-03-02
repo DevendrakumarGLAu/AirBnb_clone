@@ -37,7 +37,8 @@ function AllRooms() {
   };
 
   const navigateToRoomDetails = (roomId) => {
-    navigate(`/roomDetails/${roomId}`);
+    // navigate(`/roomDetails/${roomId}`);
+    navigate(`/getRoomDetails/${roomId}`)
   };
 
   return (

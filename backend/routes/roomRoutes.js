@@ -63,6 +63,72 @@ router.get('/getAllRooms', async (req, res) => {
 });
 
 //update or edit room details
+// router.put('/editRoom/:roomId', async (req, res) => {
+//   try {
+//     const {
+//       roomName,
+//       LocationName,
+//       roomType,
+//       phoneNumber,
+//       description,
+//       rentperday,
+//       imageurls,
+//       availability,
+//       kitchen,
+//       guests,
+//       bedrooms,
+//       beds,
+//       bathrooms,
+//       reviews,
+//       amenities, // Assuming amenities are sent as an object in the request body
+//     } = req.body;
+
+//     const updatedRoom = await Room.findByIdAndUpdate(
+//       req.params.roomId,
+//       {
+//         name: roomName,
+//         LocationName,
+//         type: roomType,
+//         phonenumber: phoneNumber,
+//         description: description,
+//         rentperday: rentperday,
+//         imageurls: imageurls,
+//         availability: availability,
+//         guests: guests,
+//         bedrooms: bedrooms,
+        
+//         beds: beds,
+//         bathrooms: bathrooms,
+//         reviews: reviews,
+//         amenities: {
+//           kitchen: amenities.kitchen || false,
+//           wifi: amenities.wifi || false,
+//           freeParking: amenities.freeParking || false,
+//           washingMachine: amenities.washingMachine || false,
+//           firepit: amenities.firepit || false,
+//           carbonMonoxideAlarm: amenities.carbonMonoxideAlarm || false,
+//           smokeAlarm: amenities.smokeAlarm || false,
+//           Security_cameras: amenities.Security_cameras || false,
+//           TV: amenities.TV || false,
+//           Dryer: amenities.Dryer || false,
+//           AirConditioning: amenities.AirConditioning || false,
+//           Heating: amenities.Heating || false,
+//           Hot_water: amenities.Hot_water || false,
+//         },
+//       },
+//       { new: true }
+//     );
+
+//     if (!updatedRoom) {
+//       return res.status(404).json({ error: 'Room not found' });
+//     }
+
+//     res.status(200).json(updatedRoom);
+//   } catch (error) {
+//     console.error('Error updating room:', error);
+//     res.status(500).json({ error: 'Internal Server Error' });
+//   }
+// });
 router.put('/editRoom/:roomId', async (req, res) => {
   try {
     const {
@@ -79,8 +145,10 @@ router.put('/editRoom/:roomId', async (req, res) => {
       beds,
       bathrooms,
       reviews,
-      amenities, // Assuming amenities are sent as an object in the request body
+      amenities = {}, // Set default value as an empty object
     } = req.body;
+    console.log('Request Body:', req.body);
+
 
     const updatedRoom = await Room.findByIdAndUpdate(
       req.params.roomId,
@@ -127,6 +195,7 @@ router.put('/editRoom/:roomId', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
 
 
 // Delete Room

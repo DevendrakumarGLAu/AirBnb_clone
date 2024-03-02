@@ -1,0 +1,7 @@
+.sticky {
+    position: sticky;
+    top: 0; /* Adjust this value based on your layout */
+    z-index: 2; /* Adjust this value based on your layout */
+    background-color: #fff; /* Adjust this value based on your layout */
+    /* Add any other styles you need for the sticky behavior */
+}
