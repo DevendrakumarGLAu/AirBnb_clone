@@ -22,15 +22,39 @@ function App() {
   const isAdmin = localStorage.getItem('isAdmin') === 'true';
 
   useEffect(() => {
-    // Add logic to set loading state based on your application's needs
-    // For example, before and after making API requests
+    const tokenKey = 'token';
+    const token = localStorage.getItem(tokenKey);
+
+    const resetTokenTimeout = () => {
+      setTimeout(() => {
+        localStorage.removeItem(tokenKey);
+        // Redirect to the login page after removing the token
+        window.location.href = '/';
+      }, 3600000); 
+    };
+
+    if (token) {
+      // Perform token validation logic
+      resetTokenTimeout();
+      
+    }
+   else{
+      localStorage.clear();
+    }
+
+    setLoading(false);
   }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div className="App">
       <Router>
-      {loading && <Loader />}
-        {isLoggedIn && <Navbar />}
+
+        {localStorage.getItem('token') && <Navbar />}
+        {/* {loading && <Loader />} */}
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
@@ -39,21 +63,21 @@ function App() {
               <Route path="/home" element={<Home />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/addRoom" element={<Addroom />} />
-              <Route path="/AdminRoomDetails" element={<Adminrooms/>} />
-              <Route path="/AdminroomsPhoto" element={<AdminroomsPhoto/>} />
+              <Route path="/AdminRoomDetails" element={<Adminrooms />} />
+              <Route path="/AdminroomsPhoto" element={<AdminroomsPhoto />} />
               {/* <Route path="/roomDetails/:roomId" element={<RoomDetails />} /> */}
               <Route path="/editroom/:roomId" element={<Addroom />} />
-              <Route path="/Mybookedroom" element={<BookedRoom/>} />
+              <Route path="/Mybookedroom" element={<BookedRoom />} />
               <Route
-    path="/getRoomDetails/:roomId"
-    element={
-        isAdmin ? (
-            <Adminroomsdetails />
-        ) : (
-            <RoomDetails/>
-        )
-    }
-/>
+                path="/getRoomDetails/:roomId"
+                element={
+                  isAdmin ? (
+                    <Adminroomsdetails />
+                  ) : (
+                    <RoomDetails />
+                  )
+                }
+              />
               {/* <Route path="/getRoomDetails/:roomId" element={<Adminroomsdetails/>} /> */}
             </React.Fragment>
           )}

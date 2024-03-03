@@ -27,7 +27,7 @@ function AddRoom() {
         if (roomId) {
           const response = await axios.get(`${apiUrl}/api/rooms/getRoomDetails/${roomId}`);
           const room = response.data;
-          console.log("room update data", room);
+          // console.log("room update data", room);
 
           setValue('roomName', room.name);
           setValue('rentPerDay', room.rentperday);

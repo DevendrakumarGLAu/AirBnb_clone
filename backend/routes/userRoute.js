@@ -42,7 +42,7 @@ router.post("/login", async (req, res) => {
         jwtoken,
         { expiresIn: "1h" }
       );
-      console.log("User Object:", user);
+      // console.log("User Object:", user);
       res.send({
         token,
         userId: user._id,
