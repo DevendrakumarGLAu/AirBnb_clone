@@ -9,9 +9,7 @@ function Navbar() {
   const isLoggedIn = localStorage.getItem("token") !== null;
   const navigate = useNavigate();
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("name");
-
+   localStorage.clear();
     navigate("/");
   };
 
@@ -77,12 +75,6 @@ function Navbar() {
               My bookedRoom
             </Link>
           </li>
-
-          {/* <li className="nav-item">
-            <Link className="nav-link active" to="/Mybookedroom" style={{color:"white"}}>
-              
-            </Link>
-          </li> */}
           </ul>
             )}
             <li className="nav-item dropdown">

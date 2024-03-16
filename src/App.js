@@ -13,7 +13,7 @@ import RoomDetails from './usersScreen/RoomDetails';
 import BookedRoom from './usersScreen/BookedRoom'
 import Adminroomsdetails from './screens/Adminscreens/Adminroomsdetails';
 import Loader from './common/Loader';
-
+import ConfirmPayment from './usersScreen/ConfirmPayment';
 
 
 function App() {
@@ -24,21 +24,20 @@ function App() {
   useEffect(() => {
     const tokenKey = 'token';
     const token = localStorage.getItem(tokenKey);
-
     const resetTokenTimeout = () => {
       setTimeout(() => {
         localStorage.removeItem(tokenKey);
         // Redirect to the login page after removing the token
         window.location.href = '/';
-      }, 3600000); 
+      }, 3600000);
     };
 
     if (token) {
       // Perform token validation logic
       resetTokenTimeout();
-      
+
     }
-   else{
+    else {
       localStorage.clear();
     }
 
@@ -57,6 +56,7 @@ function App() {
         {/* {loading && <Loader />} */}
         <Routes>
           <Route path="/" element={<Login />} />
+          
           <Route path="/signup" element={<Signup />} />
           {isLoggedIn && (
             <React.Fragment>
@@ -65,7 +65,6 @@ function App() {
               <Route path="/addRoom" element={<Addroom />} />
               <Route path="/AdminRoomDetails" element={<Adminrooms />} />
               <Route path="/AdminroomsPhoto" element={<AdminroomsPhoto />} />
-              {/* <Route path="/roomDetails/:roomId" element={<RoomDetails />} /> */}
               <Route path="/editroom/:roomId" element={<Addroom />} />
               <Route path="/Mybookedroom" element={<BookedRoom />} />
               <Route
@@ -78,6 +77,7 @@ function App() {
                   )
                 }
               />
+              <Route path="/confirmPayment/:roomId" element= {<ConfirmPayment/>} />
               {/* <Route path="/getRoomDetails/:roomId" element={<Adminroomsdetails/>} /> */}
             </React.Fragment>
           )}

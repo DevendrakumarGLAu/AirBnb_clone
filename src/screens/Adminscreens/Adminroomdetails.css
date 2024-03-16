@@ -5,3 +5,8 @@
     background-color: #fff; /* Adjust this value based on your layout */
     /* Add any other styles you need for the sticky behavior */
 }
+
+.fiexd-card{
+    position: fixed;
+    
+}

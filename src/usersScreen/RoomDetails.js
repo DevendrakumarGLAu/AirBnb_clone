@@ -65,36 +65,37 @@ function RoomDetails() {
         setDateRange(ranges.selection);
     };
     const handleBookRoom = async () => {
-        try {
-          const userId = localStorage.getItem('userId');
-          const userName = localStorage.getItem('name');
+        navigate(`/confirmPayment/${roomId}`);
+        // try {
+        //   const userId = localStorage.getItem('userId');
+        //   const userName = localStorage.getItem('name');
     
-          if (room && room.status === 'not booked') {
-            const response = await axios.post(
-              `${process.env.REACT_APP_API_URL}/api/bookings/bookRoom/${roomId}`,
-              {
-                userId,
-                userName,
-                roomDetails: room,
-              }
-            );
+        //   if (room && room.status === 'not booked') {
+        //     const response = await axios.post(
+        //       `${process.env.REACT_APP_API_URL}/api/bookings/bookRoom/${roomId}`,
+        //       {
+        //         userId,
+        //         userName,
+        //         roomDetails: room,
+        //       }
+        //     );
     
-            if (response.status === 200) {
-              const confirmed = window.confirm('Do you want to book the room?');
-              if (confirmed) {
-                alert('Your room has been booked successfully!');
-                setIsRoomBooked(true);
-                navigate('/home');
-              }
-            } else {
-              console.error('Failed to book room. Server response:', response.status);
-            }
-          } else {
-            console.error('Room already booked');
-          }
-        } catch (error) {
-          console.error('Error booking room:', error);
-        }
+        //     if (response.status === 200) {
+        //       const confirmed = window.confirm('Do you want to book the room?');
+        //       if (confirmed) {
+        //         alert('Your room has been booked successfully!');
+        //         setIsRoomBooked(true);
+        //         navigate('/home');
+        //       }
+        //     } else {
+        //       console.error('Failed to book room. Server response:', response.status);
+        //     }
+        //   } else {
+        //     console.error('Room already booked');
+        //   }
+        // } catch (error) {
+        //   console.error('Error booking room:', error);
+        // }
       };
     
 
@@ -184,8 +185,8 @@ function RoomDetails() {
                                                 )
                                             ))}
                                         </ol>
-                                        <div className='col-lg-5 mx-2'>
-                                            <div className='card z-2 position-static' style={{ bottom: '20px' }}>
+                                        <div className='col-lg-5 mx-2' style={{ position: 'relative' }}>
+                                            <div className='card' style={{ bottom: '40px',width:"35vw", position: 'absolute', overflow: 'auto', zIndex: 2, maxHeight: 'calc(100vh - 40px)' }}>
                                                 <div className='card-body'>
                                                     <h5><i>&#x20B9;</i> {room.rentperday} <span className='text-body-secondary'>night</span></h5>
                                                     <div className="container text-center">
@@ -209,8 +210,19 @@ function RoomDetails() {
                                                                 <option value='5'>5</option>
                                                             </select>
                                                         </div>
+                                                        <div class="d-flex justify-content-center mt-2" style={{width:'100%'}}>
+                                                            {
+                                                                room.status === 'booked' ? (
+                                                                    <span className='text-danger text-center'>Room is booked between this Date</span>
+                                                                ) : (
+                                                                    <button type="button" className="btn btn-danger mt-2" onClick={handleBookRoom}>Reserve</button>
+                                                                )
+                                                            }
+                                                            {/* {room.status === 'booked' && <button type="button" className="btn btn-danger mt-2" >Reserve</button>} */}
+                                                            {/* {!isAdmin && <span className='text-danger text-center'>You won't be charged yet</span>} */}
+                                                        </div>
                                                         <div className="d-flex justify-content-between">
-                                                            <div class="">
+                                                            <div class="" >
                                                                 <div class="d-flex flex-row">
                                                                     <div class="p-1"><i>&#x20B9;</i> </div>
                                                                     <div class="p-1">{room.rentperday} X</div>
@@ -229,17 +241,7 @@ function RoomDetails() {
                                                             <div class="p-1"><h5><i>&#x20B9;</i>{parseInt(room.rentperday * daysDifference * 1.15)}</h5></div>
                                                         </div>
 
-                                                        <div class="d-flex justify-content-center mt-2">
-                                                            {
-                                                                room.status === 'booked' ? (
-                                                                    <span className='text-danger text-center'>Room is booked between this Date</span>
-                                                                ) : (
-                                                                    <button type="button" className="btn btn-danger mt-2" onClick={handleBookRoom}>Reserve</button>
-                                                                )
-                                                            }
-                                                            {/* {room.status === 'booked' && <button type="button" className="btn btn-danger mt-2" >Reserve</button>} */}
-                                                            {/* {!isAdmin && <span className='text-danger text-center'>You won't be charged yet</span>} */}
-                                                        </div>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>

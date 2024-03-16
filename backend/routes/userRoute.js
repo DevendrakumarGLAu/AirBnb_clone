@@ -30,25 +30,33 @@ router.post("/register", async (req, res) => {
 
 
 
-
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email: email, password: password });
     if (user) {
-      // Create JWT token
+      // Create JWT token with expiration in 10 seconds
       const token = jwt.sign(
         { userId: user._id, email: user.email, isAdmin: user.isAdmin, name: user.name },
         jwtoken,
-        { expiresIn: "1h" }
+        { expiresIn: "10s" }
       );
-      // console.log("User Object:", user);
-      res.send({
-        token,
-        userId: user._id,
-        email: user.email,
-        isAdmin: user.isAdmin,
-        name: user.name,
+
+      // Verify the token to check if it's expired
+      jwt.verify(token, jwtoken, (err, decoded) => {
+        if (err) {
+          // Token is expired
+          return res.status(401).json({ message: "Token expired" });
+        }
+
+        // Token is valid
+        res.send({
+          token,
+          userId: user._id,
+          email: user.email,
+          isAdmin: user.isAdmin,
+          name: user.name,
+        });
       });
     } else {
       return res.status(400).json({ message: "Login Failed" });
@@ -57,6 +65,34 @@ router.post("/login", async (req, res) => {
     return res.status(400).json({ message: error });
   }
 });
+
+// router.post("/login", async (req, res) => {
+//   try {
+//     const { email, password } = req.body;
+//     const user = await User.findOne({ email: email, password: password });
+//     if (user) {
+//       // Create JWT token
+//       const token = jwt.sign(
+//         { userId: user._id, email: user.email, isAdmin: user.isAdmin, name: user.name },
+//         jwtoken,
+//         { expiresIn: "10s" }
+//       );
+      
+//       // console.log("User Object:", user);
+//       res.send({
+//         token,
+//         userId: user._id,
+//         email: user.email,
+//         isAdmin: user.isAdmin,
+//         name: user.name,
+//       });
+//     } else {
+//       return res.status(400).json({ message: "Login Failed" });
+//     }
+//   } catch (error) {
+//     return res.status(400).json({ message: error });
+//   }
+// });
 router.get('/getallusers', async (req, res) => {
   try {
     const users = await User.find();

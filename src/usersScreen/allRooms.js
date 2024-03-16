@@ -4,6 +4,7 @@ import axios from "axios";
 // import 'react-date-range/dist/styles.css';
 // import 'react-date-range/dist/theme/default.css';
 import { useNavigate } from "react-router-dom";
+import Navbar from "../common/Navbar";
 
 function AllRooms() {
   const [response, setResponse] = useState([]);
@@ -42,8 +43,9 @@ function AllRooms() {
   };
 
   return (
+    
     <div className="container" style={{marginTop:"4%",marginBottom:"4%"}}>
-      {/* <DateRangePicker ranges={selectedDateRange} onChange={handleDateSelect} /> */}
+      <Navbar/>
       <div className="d-flex justify-content-around">
         <div className="row">
           {response.map((room, roomIndex) => (

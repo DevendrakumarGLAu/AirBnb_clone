@@ -149,7 +149,7 @@ function Adminroomsdetails() {
                                             ))}
                                         </ol>
                                         <div className='col-lg-5 mx-2'>
-                                            <div className='card z-2 position-static' style={{ bottom: '20px' }}>
+                                            <div className='card z-2 fiexd-card' style={{ bottom: '20px',position:'fixed',overflow:'auto', zIndex:2 }}>
                                                 <div className='card-body'>
                                                     <h5><i>&#x20B9;</i> {room.rentperday} <span className='text-body-secondary'>night</span></h5>
                                                     <div className="container text-center">
@@ -169,6 +169,13 @@ function Adminroomsdetails() {
                                                                 <option value=''>2</option>
                                                                 <option value=''>3</option>
                                                             </select>
+                                                        </div>
+                                                        <div class="d-flex justify-content-center mt-2">
+                                                            {isAdmin && <button className="btn btn-danger">
+                                                                <Link to={`/editroom/${room._id}`} style={{ color: "white" }}>Edit</Link>
+                                                            </button>}
+                                                            {!isAdmin && <button type="button" className="btn btn-danger mt-2">Reserve</button>}
+                                                            {!isAdmin && <span className='text-danger text-center'>You won't be charged yet</span>}
                                                         </div>
                                                         <div className="d-flex justify-content-between">
                                                             <div class="">
@@ -190,13 +197,7 @@ function Adminroomsdetails() {
                                                             <div class="p-1"><h5><i>&#x20B9;</i>{room.rentperday * daysDifference * 1.15}</h5></div>
                                                         </div>
 
-                                                        <div class="d-flex justify-content-center mt-2">
-                                                            {isAdmin && <button className="btn btn-danger">
-                                                                <Link to={`/editroom/${room._id}`} style={{ color: "white" }}>Edit</Link>
-                                                            </button>}
-                                                            {!isAdmin && <button type="button" className="btn btn-danger mt-2">Reserve</button>}
-                                                            {!isAdmin && <span className='text-danger text-center'>You won't be charged yet</span>}
-                                                        </div>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -220,7 +221,6 @@ function Adminroomsdetails() {
                                 <div className='card-body'>
                                     <div className=' p-4'>
                                         <iframe src={room.googleLocation} width="100%" height="450" style={{ border: "0;" }} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
                                     </div>
                                 </div>
                             </div>
