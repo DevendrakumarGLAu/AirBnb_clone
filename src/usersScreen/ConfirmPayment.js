@@ -5,6 +5,7 @@ import { useNavigate, useParams, Link } from 'react-router-dom';
 import { Modal, Button } from 'react-bootstrap';
 import Creditcard from '../common/Creditcard';
 // import Logo from '../common/airbnb.svg';
+import FooterScreen from '../common/FooterScreen';
 
 
 function ConfirmPayment() {
@@ -204,9 +205,12 @@ function ConfirmPayment() {
                                 </Button>
                             </Modal.Footer>
                         </Modal>
+
                     </div>
+                    
                 )
-            )}
+            )} 
+            <FooterScreen/>
         </div>
     );
 }

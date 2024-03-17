@@ -22,9 +22,9 @@ function Creditcard() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>       
         </div>
     )
 }
 
-export default Creditcard
+export default Creditcard;
