@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import FooterScreen from '../common/FooterScreen';
 import { DateRangePicker } from 'react-date-range';
+import Loader from '../common/Loader';
 function RoomDetails() {
     const [room, setRoom] = useState(null);
     const { roomId } = useParams();
@@ -17,7 +18,7 @@ function RoomDetails() {
         key: 'selection',
     });
     const [isRoomBooked, setIsRoomBooked] = useState(false);
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchRoomDetails = async () => {
@@ -69,7 +70,7 @@ function RoomDetails() {
         // try {
         //   const userId = localStorage.getItem('userId');
         //   const userName = localStorage.getItem('name');
-    
+
         //   if (room && room.status === 'not booked') {
         //     const response = await axios.post(
         //       `${process.env.REACT_APP_API_URL}/api/bookings/bookRoom/${roomId}`,
@@ -79,7 +80,7 @@ function RoomDetails() {
         //         roomDetails: room,
         //       }
         //     );
-    
+
         //     if (response.status === 200) {
         //       const confirmed = window.confirm('Do you want to book the room?');
         //       if (confirmed) {
@@ -96,15 +97,15 @@ function RoomDetails() {
         // } catch (error) {
         //   console.error('Error booking room:', error);
         // }
-      };
-    
+    };
+
 
     return (
         <div className='mt-4'>
             <div className='mt-4'>
                 <p className='mt-4'>RoomDetails</p>
                 {loading ? (
-                    <p>Loading...</p>
+                    <p><Loader /></p>
                 ) : (
                     room && (
                         <div>
@@ -186,7 +187,7 @@ function RoomDetails() {
                                             ))}
                                         </ol>
                                         <div className='col-lg-5 mx-2' style={{ position: 'relative' }}>
-                                            <div className='card' style={{ bottom: '40px',width:"35vw", position: 'absolute', overflow: 'auto', zIndex: 2, maxHeight: 'calc(100vh - 40px)' }}>
+                                            <div className='card' style={{ bottom: '40px', width: "35vw", position: 'absolute', overflow: 'auto', zIndex: 2, maxHeight: 'calc(100vh - 40px)' }}>
                                                 <div className='card-body'>
                                                     <h5><i>&#x20B9;</i> {room.rentperday} <span className='text-body-secondary'>night</span></h5>
                                                     <div className="container text-center">
@@ -202,7 +203,7 @@ function RoomDetails() {
                                                         <div className="col border border-rounded p-2 " style={{ width: '100%' }}>
                                                             <label >No of Guest</label>
                                                             <select className="form-select form-select-lg mb-3" aria-label="Large select example">
-                                                            <option selected> {room.guests}</option>
+                                                                <option selected> {room.guests}</option>
                                                                 <option value='1'>1</option>
                                                                 <option value='2'>2</option>
                                                                 <option value='3'>3</option>
@@ -210,7 +211,7 @@ function RoomDetails() {
                                                                 <option value='5'>5</option>
                                                             </select>
                                                         </div>
-                                                        <div class="d-flex justify-content-center mt-2" style={{width:'100%'}}>
+                                                        <div class="d-flex justify-content-center mt-2" style={{ width: '100%' }}>
                                                             {
                                                                 room.status === 'booked' ? (
                                                                     <span className='text-danger text-center'>Room is booked between this Date</span>
@@ -241,7 +242,7 @@ function RoomDetails() {
                                                             <div class="p-1"><h5><i>&#x20B9;</i>{parseInt(room.rentperday * daysDifference * 1.15)}</h5></div>
                                                         </div>
 
-                                                        
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -274,8 +275,6 @@ function RoomDetails() {
                     )
                 )}
             </div>
-
-
         </div>
     )
 }

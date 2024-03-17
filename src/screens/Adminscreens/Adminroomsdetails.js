@@ -5,6 +5,7 @@ import '../Adminscreens/Adminroomdetails.css';
 import { Link } from 'react-router-dom';
 import FooterScreen from '../../common/FooterScreen';
 import { DateRangePicker } from 'react-date-range';
+import Loader from '../../common/Loader'
 function Adminroomsdetails() {
     const [room, setRoom] = useState(null);
     const { roomId } = useParams();
@@ -67,7 +68,7 @@ function Adminroomsdetails() {
             <div className='mt-4'>
                 <p className='mt-4'>Adminroomsdetails</p>
                 {loading ? (
-                    <p>Loading...</p>
+                    <p><Loader/></p>
                 ) : (
                     room && (
                         <div>

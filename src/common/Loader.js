@@ -4,6 +4,7 @@ import '../common/Loader.css'
 function Loader() {
     return (
         <div>
+			<div class="d-flex justify-content-center" style={{marginTop:"20%"}}>
            		<svg class="pl" viewBox="0 0 160 160" width="160px" height="160px" xmlns="http://www.w3.org/2000/svg">
 			<defs>
 				<linearGradient id="grad" x1="0" y1="0" x2="0" y2="1">
@@ -71,6 +72,7 @@ function Loader() {
 				</g>
 			</g>
 		</svg>
+		</div>
         </div>
     )
 }

@@ -6,6 +6,7 @@ import { Modal, Button } from 'react-bootstrap';
 import Creditcard from '../common/Creditcard';
 // import Logo from '../common/airbnb.svg';
 import FooterScreen from '../common/FooterScreen';
+import Loader from '../common/Loader';
 
 
 function ConfirmPayment() {
@@ -123,7 +124,7 @@ function ConfirmPayment() {
     return (
         <div className="container" style={{ marginTop: "80px" }}>
             {loading ? (
-                <p>Loading...</p>
+                <p><Loader/></p>
             ) : (
                 room && (
                     <div>

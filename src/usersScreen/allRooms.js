@@ -45,7 +45,7 @@ function AllRooms() {
   return (
     
     <div className="container" style={{marginTop:"4%",marginBottom:"4%"}}>
-      <Navbar/>
+      {/* <Navbar/> */}
       <div className="d-flex justify-content-around">
         <div className="row">
           {response.map((room, roomIndex) => (
