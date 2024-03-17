@@ -1,13 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './FooterScreen.css';
+import Logo from './airbnb.svg'
 
 function FooterScreen() {
     return (
         <div>
-             <hr></hr>
+            <hr></hr>
             <div className="d-flex flex-row mb-3">
-  <div class="p-2">AirBnB</div></div>
+                <div class="">
+                    <img src={Logo} alt="Airbnb Logo" style={{width:"40px",height:"100px"}}/>
+                </div></div>
             <hr></hr>
             <div className="d-flex justify-content-around">
                 <div className="p-2">

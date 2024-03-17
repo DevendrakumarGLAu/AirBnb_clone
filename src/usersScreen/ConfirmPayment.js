@@ -73,7 +73,7 @@ function ConfirmPayment() {
     const handleCloseModal = () => {
         setShowModal(false);
     };
-    const handlePaymentModal = async () =>{
+    const handlePaymentModal = async () => {
         try {
             const userId = localStorage.getItem('userId');
             const userName = localStorage.getItem('name');
@@ -122,9 +122,10 @@ function ConfirmPayment() {
     const daysDifference = calculateDaysDifference();
 
     return (
+        <>
         <div className="container" style={{ marginTop: "80px" }}>
             {loading ? (
-                <p><Loader/></p>
+                <p><Loader /></p>
             ) : (
                 room && (
                     <div>
@@ -151,58 +152,54 @@ function ConfirmPayment() {
                                             <div className="col-6"> <Link to='editdate' className='text-danger'><h5>Edit</h5></Link> </div>
                                         </div>
                                         <div className="row">
-                                            <div className="col-9"><h4>Guests</h4></div>
-                                            <div className="col-4">
-                                                <p>{room.guests} guest</p>
+                                            <div className="">
+                                                <label for="formGroupExampleInput" className="form-label">Mobile Number</label>
+                                                <input type="number" className="form-control" id="formGroupExampleInput" placeholder="enter mobile number" />
                                             </div>
-                                            <div className="col-6"> <Link to='editdate' className='text-danger'><h5>Edit</h5></Link> </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div className='col-md-6'>
-                                        <div className='card' >
-                                            <div className='card-body' style={{boxShadow:'10px 5px 5px red;'}}>
-                                                <h5>{room.name}</h5>
-                                                <p>{room.LocationName} </p>
-                                                <p><i class="fa-solid fa-star"></i> &nbsp;{room.reviews} ratings</p>
-                                                <hr className='mb-2'></hr>
-                                                <h4>Price Details</h4>
-                                                <div className="d-flex justify-content-between">
-                                                            <div class="" >
-                                                                <div class="d-flex flex-row">
-                                                                    <div class="p-1"><i>&#x20B9;</i> </div>
-                                                                    <div class="p-1">{room.rentperday} X</div>
-                                                                    <div class="p-1">{daysDifference !== null && <p><span className='text-danger'></span> {daysDifference} nights</p>}</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="p-1"><i>&#x20B9;</i>{room.rentperday * daysDifference}</div>
-                                                        </div>
-                                                        <div class="d-flex justify-content-between">
-                                                            <div class="p-1">AirBnB service charge</div>
-                                                            <div class="p-1"><i>&#x20B9;</i>{parseInt(room.rentperday * daysDifference * .15)}</div>
-                                                        </div>
-                                                        <hr></hr>
-                                                        <div class="d-flex justify-content-between">
-                                                            <div class="p-1"><h5>Total before taxes</h5></div>
-                                                            <div class="p-1"><h5><i>&#x20B9;</i>{parseInt(room.rentperday * daysDifference * 1.15)}</h5></div>
-                                                        </div>
+                                    <div className='card' >
+                                        <div className='card-body' style={{ boxShadow: '10px 5px 5px red;' }}>
+                                            <h5>{room.name}</h5>
+                                            <p>{room.LocationName} </p>
+                                            <p><i class="fa-solid fa-star"></i> &nbsp;{room.reviews} ratings</p>
+                                            <hr className='mb-2'></hr>
+                                            <h4>Price Details</h4>
+                                            <div className="d-flex justify-content-between">
+                                                <div class="" >
+                                                    <div class="d-flex flex-row">
+                                                        <div class="p-1"><i>&#x20B9;</i> </div>
+                                                        <div class="p-1">{room.rentperday} X</div>
+                                                        <div class="p-1">{daysDifference !== null && <p><span className='text-danger'></span> {daysDifference} nights</p>}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="p-1"><i>&#x20B9;</i>{room.rentperday * daysDifference}</div>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="p-1">AirBnB service charge</div>
+                                                <div class="p-1"><i>&#x20B9;</i>{parseInt(room.rentperday * daysDifference * .15)}</div>
+                                            </div>
+                                            <hr></hr>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="p-1"><h5>Total before taxes</h5></div>
+                                                <div class="p-1"><h5><i>&#x20B9;</i>{parseInt(room.rentperday * daysDifference * 1.15)}</h5></div>
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
                                 <button type="button" className="btn btn-primary" onClick={handleConfirmPayment}>
-                            Confirm Payment
-                        </button>
+                                    Confirm Payment
+                                </button>
                             </div>
                         </div>
-
-                        
-
                         <Modal show={showModal} onHide={handleCloseModal}>
                             <Modal.Header closeButton>
                                 <Modal.Title>Payment Options</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
-                                <Creditcard/>
+                                <Creditcard />
                             </Modal.Body>
                             <Modal.Footer>
                                 <Button variant="secondary" onClick={handleCloseModal}>
@@ -213,13 +210,13 @@ function ConfirmPayment() {
                                 </Button>
                             </Modal.Footer>
                         </Modal>
-
                     </div>
-                    
                 )
-            )} 
-            <FooterScreen/>
+            )}
+           
         </div>
+        <FooterScreen />
+        </>
     );
 }
 export default ConfirmPayment;
