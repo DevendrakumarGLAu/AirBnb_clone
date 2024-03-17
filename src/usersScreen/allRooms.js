@@ -132,7 +132,7 @@ function AllRooms() {
                        })}
                      </p>
                     ) : (
-                      <h6>Booked</h6>
+                      <h6 className="text-danger mb-3">Booked</h6>
                     )}
                       </div>
                       <div className="col-md-6">
