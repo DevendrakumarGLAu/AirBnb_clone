@@ -117,7 +117,9 @@ function AllRooms() {
                     </a>
                   </div>
                   <div className="mt-2">
-                    {room.status === "not booked" && room.availability ? (
+                    <div className="row">
+                      <div className="col-md-6">
+                      {room.status === "not booked" && room.availability ? (
                        <p>
                        {new Date(room.availability.startDate).toLocaleDateString('en-Uk', {
                          day: 'numeric',
@@ -132,6 +134,12 @@ function AllRooms() {
                     ) : (
                       <h6>Booked</h6>
                     )}
+                      </div>
+                      <div className="col-md-6">
+                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-star"></i>{room.reviews} ratings
+                      </div>
+                    </div>
+                    
                     <h6> Rs. {room.rentperday} /night</h6>
                   </div>
 

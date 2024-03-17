@@ -13,7 +13,7 @@ import RoomDetails from './usersScreen/RoomDetails';
 import BookedRoom from './usersScreen/BookedRoom'
 import Adminroomsdetails from './screens/Adminscreens/Adminroomsdetails';
 import Loader from './common/Loader';
-import ConfirmPayment from './usersScreen/ConfirmPayment';
+import ConfirmPayment from '../src/usersScreen/ConfirmPayment';
 
 
 function App() {

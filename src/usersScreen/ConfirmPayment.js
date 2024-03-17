@@ -149,6 +149,13 @@ function ConfirmPayment() {
                                             </div>
                                             <div className="col-6"> <Link to='editdate' className='text-danger'><h5>Edit</h5></Link> </div>
                                         </div>
+                                        <div className="row">
+                                            <div className="col-9"><h4>Guests</h4></div>
+                                            <div className="col-4">
+                                                <p>{room.guests} guest</p>
+                                            </div>
+                                            <div className="col-6"> <Link to='editdate' className='text-danger'><h5>Edit</h5></Link> </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className='col-md-6'>
